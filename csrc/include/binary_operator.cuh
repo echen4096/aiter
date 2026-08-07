@@ -1581,8 +1581,7 @@ struct BinaryOperationPattern<2, Operation, _T0, _T1>
             {
                 VLLM_DISPATCH_FLOATING_TYPES_rmTorch(
                     output.dtype(), "operator_bcast_tile_kernel", [&] {
-                        aiter::
-                            operator_bcast_tile_kernel<scalar_t, rows, Operation, false, _T1, _T0>
+                        aiter::operator_bcast_tile_kernel<scalar_t, rows, Operation, false, _T1, _T0>
                             <<<grid_dim, block_dim, 0, stream>>>(
                                 buf_b, buf_a, buf_c, M, N, K, types_match);
                     });
@@ -2204,8 +2203,7 @@ struct BinaryOperationPattern<4, Operation, _T0, _T1>
             const dim3 block_dim(wg, 1, 1);
             VLLM_DISPATCH_FLOATING_TYPES_rmTorch(
                 output.dtype(), "operator_contiguous_kernel_naive", [&] {
-                    aiter::
-                        operator_contiguous_kernel_naive<scalar_t, rows, Operation, true, _T0, _T1>
+                    aiter::operator_contiguous_kernel_naive<scalar_t, rows, Operation, true, _T0, _T1>
                         <<<grid_dim, block_dim, 0, stream>>>(
                             buf_a, buf_b, buf_c, num_elements, types_match);
                 });
